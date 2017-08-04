@@ -2593,32 +2593,25 @@
  ], 
  "nodes": [
   {
-   "id": "VA-WK-HR001.hf.com",
-   "group": 1
+   "id": "VA-WK-HR001.hf.com"
   }, 
   {
-   "id": "VA-WK-ACCT003.hf.com",
-   "group": 1
+   "id": "VA-WK-ACCT003.hf.com"
   }, 
   {
-   "id": "VA-WK-ACCT002.hf.com",
-   "group": 1
+   "id": "VA-WK-ACCT002.hf.com"
   }, 
   {
-   "id": "VA-WK-HR003.hf.com",
-   "group": 1
+   "id": "VA-WK-HR003.hf.com"
   }, 
   {
-   "id": "WK-VA-HR002.hf.com",
-   "group": 1
+   "id": "WK-VA-HR002.hf.com"
   }, 
   {
-   "id": "HFDC01.hf.com",
-   "group": 1
+   "id": "HFDC01.hf.com"
   }, 
   {
-   "id": "172.18.39.101",
-   "group": 2
+   "id": "172.18.39.101"
   }
  ]
 }
