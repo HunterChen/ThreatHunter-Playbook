@@ -36,8 +36,7 @@ function drawNetworkGraph(json) {
 	var force = d3.layout.force()
 		.size([width, height])
 		.gravity(0.1)
-		.charge(-500)
-		.theta(0.1)
+		.charge(-300)
 		.nodes(json.nodes)
 		.links(json.links)
 		.linkDistance(width/2)
@@ -97,15 +96,15 @@ function drawNetworkGraph(json) {
 		.style("fill", function (d) {return color(d.group);})
 		.call(force.drag);
 		
-	//node.append('circle')
-	//	.attr("r", "10");
+	node.append('circle')
+		.attr("r", "10");
 	
-	node.append("image")
-      .attr("xlink:href", "https://github.com/Cyb3rWard0g/CyberWardogLab/raw/master/computer_color.ico")
-      .attr("x", -18)
-      .attr("y", -18)
-      .attr("width", 35)
-      .attr("height", 35);
+	//node.append("image")
+    //  .attr("xlink:href", "https://github.com/Cyb3rWard0g/CyberWardogLab/raw/master/computer_color.ico")
+    //  .attr("x", -18)
+    //  .attr("y", -18)
+    //  .attr("width", 35)
+    //  .attr("height", 35);
 		
 	node.append("text")
       .attr("x", 22) //set the position of the node text. How close or not to the node
