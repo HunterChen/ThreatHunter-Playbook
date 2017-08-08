@@ -36,7 +36,7 @@ function drawNetworkGraph(json) {
 	var force = d3.layout.force()
 		.size([width, height])
 		.gravity(0.1)
-		.charge(-300)
+		.charge(300)
 		.nodes(json.nodes)
 		.links(json.links)
 		.linkDistance(width/2)
