@@ -10,12 +10,11 @@
 	}	
 	
 	.node text {
-		stroke:#333;
 		cursos:pointer;
 	}
 	
 	.link {
-		stroke: #777;
+		stroke: #fff;
 		stroke-width: 2px;
 	}
 </style>
@@ -26,7 +25,7 @@
 var width = 1050,
 	height = 900;
 
-var color = d3.scale.category20();
+// var color = d3.scale.category10();
 
 function drawNetworkGraph(json) {
 	var svg = d3.select("body").append("svg")
@@ -36,16 +35,26 @@ function drawNetworkGraph(json) {
 	var force = d3.layout.force()
 		.size([width, height])
 		.gravity(0.1)
-		.charge(300)
+		.charge(-300)
 		.nodes(json.nodes)
 		.links(json.links)
-		.linkDistance(width/2)
+		.linkDistance(width/4)
 		.start();
 		
 	var link = svg.selectAll('.link')
 		.data(json.links)
 		.enter().append('line')
 		.attr('class', 'link')
+		.style("stroke", 
+			function(d){
+				if (d.label == 1 ){
+					return "Red";
+				} 
+				else {
+					return "gray";
+				}	
+			}
+		)
 		.style("marker-end", "url(#arrow)");
 	
 // from http://bl.ocks.org/jhb/5955887	& http://bl.ocks.org/fancellu/2c782394602a93921faff74e594d1bb1
@@ -59,7 +68,7 @@ function drawNetworkGraph(json) {
                'fill':'blue',
                'stroke':'red',
                'id':function(d,i) {return 'edgepath'+i}})
-        .style("pointer-events", "none");
+		.style("pointer-events", "none");
 
     var edgelabels = svg.selectAll(".edgelabel")
         .data(json.links)
@@ -69,8 +78,7 @@ function drawNetworkGraph(json) {
                'id':function(d,i){return 'edgelabel'+i},
                'dx':80,
                'dy':14,
-               'font-size':14,
-               'fill':'black'});
+               'font-size':14});
 
     edgelabels.append('textPath')
         .attr('xlink:href',function(d,i) {return '#edgepath'+i})
@@ -93,18 +101,18 @@ function drawNetworkGraph(json) {
 		.data(json.nodes)
 		.enter().append("g")
 		.attr('class', 'node')
-		.style("fill", function (d) {return color(d.group);})
+		//.style("fill", function (d) {return color(d.group);})
 		.call(force.drag);
 		
 	node.append('circle')
 		.attr("r", "10");
 	
-	//node.append("image")
-    //  .attr("xlink:href", "https://github.com/Cyb3rWard0g/CyberWardogLab/raw/master/computer_color.ico")
-    //  .attr("x", -18)
-    //  .attr("y", -18)
-    //  .attr("width", 35)
-    //  .attr("height", 35);
+	node.append("image")
+      .attr("xlink:href", "https://github.com/Cyb3rWard0g/CyberWardogLab/raw/master/computer_color.ico")
+      .attr("x", -18)
+      .attr("y", -18)
+      .attr("width", 35)
+      .attr("height", 35);
 		
 	node.append("text")
       .attr("x", 22) //set the position of the node text. How close or not to the node
@@ -125,9 +133,7 @@ function drawNetworkGraph(json) {
 		    .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 		
 		d3.selectAll(".edgepath")
-			.attr('d', function(d) { var path='M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y;
-                                           //console.log(d)
-                                           return path});       
+			.attr('d', function(d) { var path='M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y; return path});       
 
        d3.selectAll(".edgelabel")
 			.attr('transform',function(d,i){
@@ -151,15 +157,13 @@ function drawNetworkGraph(json) {
 		.enter().append("marker")
 		.attr("id", function(d) { return d; })
 		.attr("viewBox", "0 -5 10 10")
-		.attr("refX", 13) //position of the arrow. Closer or not to the node
+		.attr("refX", 12) //position of the arrow. Closer or not to the node
 		.attr("refY", 2) //position of the arrow. closer or not to the line/link
 		.attr("markerWidth", 12)
 		.attr("markerHeight", 12)
 		.attr("orient", "auto")
 		.append("path")
-			.attr("d", "M 0,0 V 4 L6,2 Z") //shape of the arrow head
-			.style("stroke", "#000000")
-			.style("opacity", "1.6");
+			.attr("d", "M 0,0 V 4 L6,2 Z"); //shape of the arrow head
 }
 </script>
 <script>
